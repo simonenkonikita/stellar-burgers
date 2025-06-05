@@ -48,7 +48,8 @@ export const userSlice = createSlice({
     isAuthCheckedSelector: (state) => state.isAuthChecked,
     getUser: (state) => state.user,
     getUserName: (state) => state.user?.name,
-    getError: (state) => state.error
+    getError: (state) => state.error,
+    getUserLoadingsState: (state) => state.isLoading
   },
   extraReducers: (builder) => {
     builder
@@ -122,7 +123,7 @@ export const userSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(logout.fulfilled, (state) => {
-        state.isAuthChecked = false;
+        state.isAuthChecked = true;
         state.user = null;
         state.isLoading = false;
         state.error = null;
@@ -130,5 +131,10 @@ export const userSlice = createSlice({
   }
 });
 
-export const { isAuthCheckedSelector, getUser, getUserName, getError } =
-  userSlice.selectors;
+export const {
+  isAuthCheckedSelector,
+  getUser,
+  getUserName,
+  getError,
+  getUserLoadingsState
+} = userSlice.selectors;

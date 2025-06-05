@@ -1,6 +1,11 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from '../../services/store';
-import { isAuthCheckedSelector } from '../../services/slices/userSlice';
+import {
+  isAuthCheckedSelector,
+  getUser,
+  getUserLoadingsState
+} from '../../services/slices/userSlice';
+import { Preloader } from '@ui';
 
 type ProtectedRouteProps = {
   onlyUnAuth?: boolean;
@@ -12,15 +17,19 @@ export const ProtectedRoute = ({
   children
 }: ProtectedRouteProps) => {
   const isAuthChecked = useSelector(isAuthCheckedSelector);
+  const user = useSelector(getUser);
+  const isLoading = useSelector(getUserLoadingsState);
   const location = useLocation();
 
-  if (onlyUnAuth && isAuthChecked) {
-    // Если только для неавторизованных, но пользователь авторизован — редирект на главную
+  if (isLoading || !isAuthChecked) {
+    return <Preloader />;
+  }
+
+  if (onlyUnAuth && user) {
     return <Navigate replace to='/profile' />;
   }
 
-  if (!onlyUnAuth && !isAuthChecked) {
-    // Если защищённый маршрут и пользователь не авторизован — редирект на логин
+  if (!onlyUnAuth && !user) {
     return <Navigate replace to='/login' state={{ from: location }} />;
   }
 
