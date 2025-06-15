@@ -32,6 +32,8 @@ export type TOrdersData = {
   totalToday: number;
 };
 
+
+
 export type TUser = {
   email: string;
   name: string;
