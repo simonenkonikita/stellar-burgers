@@ -98,6 +98,10 @@ describe('Конструктор бургеров', () => {
     it('Открытие модального окна', () => {
       cy.get('[data-cy="ingredient-item"]').first().children().first().click();
       cy.get('[data-cy="modal"]').should('be.visible');
+      cy.get(`[data-cy='modal-title']`).should(
+        'contain.text',
+        'Краторная булка N-200i'
+      );
     });
 
     it('Закрытие модального окна по крестику', () => {
