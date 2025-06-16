@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "accessToken": "0a1f4a41b710cf92ec74634455",
+  "refreshToken": "0a1f4a41b710cf92ec7463d69",
+  "user": {
+    "email": "ivantest222@yandex.ru",
+    "name": "Никита"
+  }
+}

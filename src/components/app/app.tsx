@@ -24,7 +24,7 @@ import { ProtectedRoute } from '../protected-route/protected-route';
 import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { getIngredientsList } from '../../services/slices/ingredientsSlice';
-import { getUserData } from '../../services/slices/userSlice';
+import { getUserData, initUser } from '../../services/slices/userSlice';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -35,12 +35,16 @@ const App = () => {
   const profileMatch = useMatch('/profile/orders/:number');
   const number = feedMatch?.params?.number || profileMatch?.params?.number;
 
-  useEffect(() => {
+  /*  useEffect(() => {
     dispatch(getIngredientsList());
-  }, []);
+
+    dispatch(getUserData());
+  }, [dispatch]); */
 
   useEffect(() => {
-    dispatch(getUserData());
+    dispatch(getIngredientsList());
+
+    dispatch(initUser());
   }, [dispatch]);
 
   return (

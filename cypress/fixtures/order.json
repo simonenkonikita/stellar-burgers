@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "name": "Флюоресцентный био-марсианский бургер",
+  "order": {
+    "ingredients": [
+      {
+        "_id": "643d69a5c3f7b9001cfa093d",
+        "name": "Флюоресцентная булка R2-D3",
+        "type": "bun",
+        "proteins": 44,
+        "fat": 26,
+        "carbohydrates": 85,
+        "calories": 643,
+        "price": 988,
+        "image": "https://code.s3.yandex.net/react/code/bun-01.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/bun-01-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "643d69a5c3f7b9001cfa0941",
+        "name": "Биокотлета из марсианской Магнолии",
+        "type": "main",
+        "proteins": 420,
+        "fat": 142,
+        "carbohydrates": 242,
+        "calories": 4242,
+        "price": 424,
+        "image": "https://code.s3.yandex.net/react/code/meat-01.png",
+        "image_mobile": "https://code.s3.yandex.net/react/code/meat-01-mobile.png",
+        "image_large": "https://code.s3.yandex.net/react/code/meat-01-large.png",
+        "__v": 0
+      }
+    ],
+    "_id": "684f2ff6c2f30c001cb2d05f",
+    "owner": {
+      "name": "Никита",
+      "email": "ivantest222@yandex.ru",
+      "createdAt": "2025-06-15T08:54:42.958Z",
+      "updatedAt": "2025-06-15T09:58:35.536Z"
+    },
+    "status": "done",
+    "name": "Флюоресцентный био-марсианский бургер",
+    "createdAt": "2025-06-15T20:41:26.823Z",
+    "updatedAt": "2025-06-15T20:41:27.590Z",
+    "number": 81596,
+    "price": 1412
+  }
+}
