@@ -5,10 +5,10 @@ import {
   registerUserApi,
   TRegisterData,
   updateUserApi
-} from '@api';
+} from '../../utils/burger-api';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { TUser } from '@utils-types';
-import { setCookie } from '../../utils/cookie';
+import { getCookie, setCookie } from '../../utils/cookie';
 
 export const getUserData = createAsyncThunk('user/getUser', getUserApi);
 export const registerUser = createAsyncThunk('user/register', registerUserApi);
@@ -23,6 +23,27 @@ export const loginUser = createAsyncThunk(
     return data.user;
   }
 );
+
+export const initUser = createAsyncThunk(
+  'user/init',
+  async (_, { dispatch }) => {
+    const accessToken = getCookie('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    if (accessToken || refreshToken) {
+      try {
+        await dispatch(getUserData()).unwrap();
+      } catch (error) {
+        console.error('Ошибка при проверке авторизации:', error);
+
+        await dispatch(logout());
+        throw error;
+      }
+    }
+    return null;
+  }
+);
+
 export const updateUser = createAsyncThunk('user/update', updateUserApi);
 export const logout = createAsyncThunk('user/logout', logoutApi);
 
@@ -127,6 +148,19 @@ export const userSlice = createSlice({
         state.user = null;
         state.isLoading = false;
         state.error = null;
+      });
+    builder
+      .addCase(initUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(initUser.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isAuthChecked = true;
+      })
+      .addCase(initUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isAuthChecked = true;
+        state.user = null;
       });
   }
 });
